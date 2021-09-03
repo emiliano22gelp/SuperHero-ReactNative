@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import CardHeroe from '../../components/SuperHeroe/CardHeroe';
-import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
+import HeaderComponent from '../../components/Header/HeaderComponent';
 import {getSuperHeroes} from '../../api/Heroes';
 import {Result} from '../../interfaces/interfaces';
 
