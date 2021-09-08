@@ -1,15 +1,13 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeApp from '../screen/Home/HomeApp';
-import FormsAutenticathionScreen from '../screen/FormSignIn/Forms';
-import FormsSignUpScreen from '../screen/FormSignUp/Forms';
+import SearchHero from '../screen/Search/SearchHero';
 import Icon from 'react-native-vector-icons/Ionicons';
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = () => {
+const TabNavigatorAutenticated = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Inicio"
+      initialRouteName="Buscar"
       screenOptions={{
         tabBarStyle: {
           position: 'absolute',
@@ -27,28 +25,14 @@ const TabNavigator = () => {
         tabBarHideOnKeyboard: true,
       }}>
       <Tab.Screen
-        name="Inicio"
-        component={HomeApp}
+        name="Buscar"
+        component={SearchHero}
         options={{
-          tabBarIcon: () => <Icon name="home-outline" />,
-        }}
-      />
-      <Tab.Screen
-        name="Iniciar Sesion"
-        component={FormsAutenticathionScreen}
-        options={{
-          tabBarIcon: () => <Icon name="person-outline" />,
-        }}
-      />
-      <Tab.Screen
-        name="Registrar"
-        component={FormsSignUpScreen}
-        options={{
-          tabBarIcon: () => <Icon name="person-add-outline" />,
+          tabBarIcon: () => <Icon name="search-outline" />,
         }}
       />
     </Tab.Navigator>
   );
 };
 
-export default TabNavigator;
+export default TabNavigatorAutenticated;
