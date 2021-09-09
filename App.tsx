@@ -5,6 +5,9 @@ import FlashMessage from 'react-native-flash-message';
 import {getData} from './src/storage';
 import TabNavigator from './src/navigation/TabNavigator';
 import TabNavigatorAutenticated from './src/navigation/TabNavigatorAutenticated';
+import HeroDetails from './src/screen/Details/HeroDetail';
+import {Provider} from 'react-redux';
+import store from './src/redux/store';
 //import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
@@ -20,29 +23,35 @@ const App = () => {
 
   return (
     <>
-      <NavigationContainer>
-        {isAutenticated === 'undefined' ? (
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false,
-            }}
-            initialRouteName="Login">
-            <Stack.Screen name="Login" component={TabNavigator} />
-            <Stack.Screen name="Team" component={TabNavigatorAutenticated} />
-          </Stack.Navigator>
-        ) : (
-          isAutenticated !== null && (
+      <Provider store={store}>
+        <NavigationContainer>
+          {isAutenticated === 'undefined' ? (
             <Stack.Navigator
               screenOptions={{
                 headerShown: false,
               }}
-              initialRouteName="Team">
+              initialRouteName="Login">
               <Stack.Screen name="Login" component={TabNavigator} />
               <Stack.Screen name="Team" component={TabNavigatorAutenticated} />
             </Stack.Navigator>
-          )
-        )}
-      </NavigationContainer>
+          ) : (
+            isAutenticated !== null && (
+              <Stack.Navigator
+                screenOptions={{
+                  headerShown: false,
+                }}
+                initialRouteName="Team">
+                <Stack.Screen name="Login" component={TabNavigator} />
+                <Stack.Screen
+                  name="Team"
+                  component={TabNavigatorAutenticated}
+                />
+                <Stack.Screen name="Detail" component={HeroDetails} />
+              </Stack.Navigator>
+            )
+          )}
+        </NavigationContainer>
+      </Provider>
       <FlashMessage position="top" />
     </>
   );

@@ -50,7 +50,7 @@ export default function SearchHero(): JSX.Element {
             <HeaderComponent searchData={searchData} />
           )}
           data={data}
-          renderItem={CardHeroe}
+          renderItem={({item}) => <CardHeroe hero={item} />}
           keyExtractor={item => item.id}
         />
       ) : (
