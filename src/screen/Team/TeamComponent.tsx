@@ -13,6 +13,15 @@ const TeamComponent = () => {
 
   const {combat, durability, intelligence, power, speed, strength} = useStats();
 
+  const powerstats = [
+    {nombre: 'Combate', stat: combat},
+    {nombre: 'Durabilidad', stat: durability},
+    {nombre: 'Inteligencia', stat: intelligence},
+    {nombre: 'Poder', stat: power},
+    {nombre: 'Velocidad', stat: speed},
+    {nombre: 'Fuerza', stat: strength},
+  ];
+
   return (
     <LinearGradient
       style={{flex: 1}}
@@ -20,12 +29,25 @@ const TeamComponent = () => {
       end={{x: 1, y: 1}}
       colors={['#00b4db', '#0083b0', '#dd3e11']}>
       <View style={{flex: 1, alignItems: 'center'}}>
-        {console.log(myTeam)}
         <Text style={styles.text}>Equipo</Text>
         <Text
           style={styles.text}>{`(${myTeam.length} miembros en total)`}</Text>
+        <View style={styles.acumulativos}>
+          {powerstats
+            .sort(function (a, b) {
+              return parseInt(b.stat) - parseInt(a.stat);
+            })
+            .map(elem => (
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: '600',
+                  color: 'white',
+                }}>{`${elem.nombre}: ${elem.stat}`}</Text>
+            ))}
+        </View>
         <FlatList
-          style={{marginTop: 20}}
+          style={{marginTop: 5}}
           data={myTeam}
           keyExtractor={item => item.id.toString()}
           renderItem={({item}) => <CardTeamHero hero={item} />}
@@ -39,9 +61,12 @@ const TeamComponent = () => {
 const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
-    marginTop: 20,
+    marginTop: 5,
     fontSize: 25,
     fontWeight: 'bold',
+  },
+  acumulativos: {
+    marginTop: 5,
   },
 });
 

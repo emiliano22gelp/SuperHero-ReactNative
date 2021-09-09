@@ -21,3 +21,10 @@ export function addTeamMember(hero: Result) {
     payload: hero,
   };
 }
+
+export function deleteTeamMember(hero: Result) {
+  return {
+    type: ActionTypes.DELETE_TEAM_MEMBER,
+    payload: hero,
+  };
+}

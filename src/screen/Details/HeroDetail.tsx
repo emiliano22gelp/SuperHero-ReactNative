@@ -14,7 +14,7 @@ import Appearance from '../../components/SuperHeroe/Appearance';
 import Stats from '../../components/SuperHeroe/Stats';
 import Info from '../../components/MoreInfo/Info';
 import {RootState} from '../../redux/store';
-import {addTeamMember} from '../../redux/actions/heroActions';
+import {addTeamMember, deleteTeamMember} from '../../redux/actions/heroActions';
 import {showMessage} from 'react-native-flash-message';
 import {useNavigation} from '@react-navigation/native';
 
@@ -27,10 +27,13 @@ const HeroDetails = ({route}) => {
   const dispatch = useDispatch();
   const navigator = useNavigation() as any;
 
-  const showToast = () => {
+  const showToast = (action: string) => {
     showMessage({
       message: 'Operacion Exitosa',
-      description: 'El Superheroe se agregado al Equipo',
+      description:
+        action === 'add'
+          ? 'El Superheroe se agregado al Equipo'
+          : 'El Superheroe ha sido eliminado del Equipo',
       type: 'success',
     });
     navigator.reset({
@@ -75,14 +78,16 @@ const HeroDetails = ({route}) => {
             <TouchableOpacity
               activeOpacity={0.7}
               onPress={() => {
-                dispatch(addTeamMember(hero)), showToast();
+                dispatch(addTeamMember(hero)), showToast('add');
               }}>
               <Text style={{fontSize: 15, fontWeight: 'bold'}}>Agregar</Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
               activeOpacity={0.7}
-              onPress={() => console.log('eliminaste un elemento')}>
+              onPress={() => {
+                dispatch(deleteTeamMember(hero)), showToast('delete');
+              }}>
               <Text style={{fontSize: 15, fontWeight: 'bold'}}>Eliminar</Text>
             </TouchableOpacity>
           )}

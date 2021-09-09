@@ -40,6 +40,19 @@ export function herosReducer(
         ...state,
         myTeam: newArray,
       };
+    case ActionTypes.DELETE_TEAM_MEMBER:
+      let nuevoArray = state.myTeam;
+      let count = 0;
+      nuevoArray.forEach(element => {
+        if (element.id === payload.id) {
+          nuevoArray.splice(count, 1);
+        }
+        count = count + 1;
+      });
+      return {
+        ...state,
+        myTeam: nuevoArray,
+      };
     default:
       return state;
   }
