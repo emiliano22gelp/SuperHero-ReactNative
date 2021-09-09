@@ -56,3 +56,7 @@ export const loginUser = async (values: string) => {
     .then(res => autenticar(res, values))
     .catch(err => console.log(err));
 };
+
+export const logoutUser = () => {
+  AsyncStorage.removeItem('@user');
+};

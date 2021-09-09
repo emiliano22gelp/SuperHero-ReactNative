@@ -14,9 +14,10 @@ const CardHeroe = ({hero}: Props) => {
   const navigator = useNavigation() as any;
 
   function navigateToDetails() {
-    console.log('egfyegfyegfyeg');
     dispatch(setHeroDetailsId(hero));
-    navigator.navigate('Detail');
+    navigator.navigate('Detail', {
+      team: false,
+    });
   }
   return (
     <View style={styles.itemContainer}>

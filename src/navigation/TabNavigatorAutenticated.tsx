@@ -1,13 +1,15 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import SearchHero from '../screen/Search/SearchHero';
+import TeamComponent from '../screen/Team/TeamComponent';
 import Icon from 'react-native-vector-icons/Ionicons';
+import SignOutComponent from '../components/SignOut';
 const Tab = createBottomTabNavigator();
 
 const TabNavigatorAutenticated = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Buscar"
+      initialRouteName="Equipo"
       screenOptions={{
         tabBarStyle: {
           position: 'absolute',
@@ -27,6 +29,20 @@ const TabNavigatorAutenticated = () => {
       <Tab.Screen
         name="Buscar"
         component={SearchHero}
+        options={{
+          tabBarIcon: () => <Icon name="search-outline" />,
+        }}
+      />
+      <Tab.Screen
+        name="Equipo"
+        component={TeamComponent}
+        options={{
+          tabBarIcon: () => <Icon name="search-outline" />,
+        }}
+      />
+      <Tab.Screen
+        name="Cerrar Sesion"
+        component={SignOutComponent}
         options={{
           tabBarIcon: () => <Icon name="search-outline" />,
         }}

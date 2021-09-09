@@ -24,12 +24,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '400',
     color: 'white',
+    marginTop: 10,
   },
   container: {
     flexDirection: 'row',
   },
   text: {
     fontWeight: 'bold',
+    marginTop: 10,
   },
 });
 

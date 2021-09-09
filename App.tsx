@@ -33,6 +33,7 @@ const App = () => {
               initialRouteName="Login">
               <Stack.Screen name="Login" component={TabNavigator} />
               <Stack.Screen name="Team" component={TabNavigatorAutenticated} />
+              <Stack.Screen name="Detail" component={HeroDetails} />
             </Stack.Navigator>
           ) : (
             isAutenticated !== null && (

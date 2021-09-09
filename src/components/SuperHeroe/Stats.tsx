@@ -27,8 +27,6 @@ const Stats = ({heroStats}: Props) => {
           <Info title="Combat" info={heroStats.combat} row />
           <Info title="Durability" info={heroStats.durability} row />
           <Info title="Intelligence" info={heroStats.intelligence} row />
-        </View>
-        <View>
           <Info title="Power" info={heroStats.power} row />
           <Info title="Speed" info={heroStats.speed} row />
           <Info title="Strength" info={heroStats.strength} row />
@@ -47,14 +45,11 @@ const styles = StyleSheet.create({
   averageContainer: {
     marginTop: 25,
     padding: 8,
-    borderWidth: 2,
-    borderRadius: 10,
-    borderColor: 'white',
   },
   firstContainer: {
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 20,
+    marginTop: 5,
   },
   secondContainer: {
     flexDirection: 'row',
