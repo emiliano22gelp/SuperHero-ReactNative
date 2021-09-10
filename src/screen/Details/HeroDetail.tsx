@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -21,11 +21,25 @@ import {useNavigation} from '@react-navigation/native';
 const windowHeigth = Dimensions.get('window').height;
 
 const HeroDetails = ({route}) => {
-  //console.log(route.params.team);
   const hero = useSelector((state: RootState) => state.heros.hero);
-
+  const myTeam = useSelector((state: RootState) => state.heros.myTeam);
+  const [complete, setComplete] = useState<boolean>(false);
+  const [member, setMember] = useState<boolean>(false);
+  const [carga, setCarga] = useState<boolean>(false);
   const dispatch = useDispatch();
   const navigator = useNavigation() as any;
+
+  useEffect(() => {
+    myTeam.forEach(element => {
+      if (element.id === hero.id) {
+        setMember(true);
+      }
+    });
+    if (myTeam.length === 6) {
+      setComplete(true);
+    }
+    setCarga(true);
+  }, []);
 
   const showToast = (action: string) => {
     showMessage({
@@ -74,15 +88,19 @@ const HeroDetails = ({route}) => {
           </View>
         </ScrollView>
         <View style={styles.addHero}>
-          {route.params.team === false ? (
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => {
-                dispatch(addTeamMember(hero)), showToast('add');
-              }}>
-              <Text style={{fontSize: 15, fontWeight: 'bold'}}>Agregar</Text>
-            </TouchableOpacity>
-          ) : (
+          {route.params.team === false &&
+            carga === true &&
+            complete === false &&
+            member === false && (
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => {
+                  dispatch(addTeamMember(hero)), showToast('add');
+                }}>
+                <Text style={{fontSize: 15, fontWeight: 'bold'}}>Agregar</Text>
+              </TouchableOpacity>
+            )}
+          {route.params.team === true && (
             <TouchableOpacity
               activeOpacity={0.7}
               onPress={() => {
@@ -91,6 +109,22 @@ const HeroDetails = ({route}) => {
               <Text style={{fontSize: 15, fontWeight: 'bold'}}>Eliminar</Text>
             </TouchableOpacity>
           )}
+          {route.params.team === false &&
+            carga === true &&
+            complete === true &&
+            member === false && (
+              <Text style={{fontSize: 15, fontWeight: 'bold'}}>
+                Equipo Lleno
+              </Text>
+            )}
+          {route.params.team === false &&
+            carga === true &&
+            complete === false &&
+            member === true && (
+              <Text style={{fontSize: 15, fontWeight: 'bold'}}>
+                Ya esta agregado
+              </Text>
+            )}
         </View>
       </View>
     </LinearGradient>

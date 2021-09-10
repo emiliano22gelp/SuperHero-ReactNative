@@ -7,10 +7,7 @@ import {RootState} from '../../redux/store';
 import useStats from '../../hooks/useStats';
 
 const TeamComponent = () => {
-  const [myTeam] = useState(
-    useSelector((state: RootState) => state.heros.myTeam),
-  );
-
+  const myTeam = useSelector((state: RootState) => state.heros.myTeam);
   const {combat, durability, intelligence, power, speed, strength} = useStats();
 
   const powerstats = [
@@ -30,8 +27,15 @@ const TeamComponent = () => {
       colors={['#00b4db', '#0083b0', '#dd3e11']}>
       <View style={{flex: 1, alignItems: 'center'}}>
         <Text style={styles.text}>Equipo</Text>
-        <Text
-          style={styles.text}>{`(${myTeam.length} miembros en total)`}</Text>
+        {myTeam.length < 6 ? (
+          <Text
+            style={styles.text}>{`(${myTeam.length} miembros en total)`}</Text>
+        ) : (
+          <Text
+            style={
+              styles.text
+            }>{`Completo con (${myTeam.length} miembros)`}</Text>
+        )}
         <View style={styles.acumulativos}>
           {powerstats
             .sort(function (a, b) {
